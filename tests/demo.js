@@ -11,12 +11,12 @@ const runTask = (client, {id, cookie, host}) => {
   const url = `${host}/#/items/edit/limit?item.id=${id}`;
   client
   .url(url)
-  .maximizeWindow()
+  .windowMaximize()
   .setCookie(cookie, () => {
     const searchBtn = '.ui-button'
     
     // Launch browser and open bing.com.
-    client.url(url).maximizeWindow()
+    client.url(url).windowMaximize()
     client.pause(3000);
 
     // Make sure both "body" and search input are available.
@@ -24,7 +24,7 @@ const runTask = (client, {id, cookie, host}) => {
 
     client.expect.element(searchBtn).to.be.visible;
     client.pause(1500);  // Just wait 2s.
-
+    client.execute("$('.tab-btn .ui-button')[2].click()")
     // Type "what is microsoft" in searching input and submit.
     client.click(searchBtn);
     client.pause(3000);
